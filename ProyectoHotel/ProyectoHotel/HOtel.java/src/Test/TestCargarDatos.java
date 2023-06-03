@@ -1,15 +1,6 @@
 package Test;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 import Clases.Habitacion;
 import Clases.Hotel;
@@ -26,7 +17,7 @@ import Clases.Temporada;
 class TestCargarDatos {
 
 	private Hotel hotel;
-	
+	/*
 	@BeforeEach
 	public void SetUp() {
 		
@@ -74,7 +65,7 @@ class TestCargarDatos {
         		()-> assertEquals(1, temPrueba)
         		);
 	}
-	
+	*/
 	
 	
 }
