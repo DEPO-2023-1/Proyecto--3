@@ -839,6 +839,38 @@ public String input(String mensaje)
 		return null;
 	}
 
+	public boolean isParqueaderoPago() {
+		return parqueaderoPago;
+	}
+	
+	public boolean isParqueaderoGratuito() {
+		return parqueaderoGratuito;
+	}
+	
+	public boolean isPiscina() {
+		return piscina;
+	}
+	
+	public boolean isZonasHumedas() {
+		return zonasHumedas;
+	}
+	
+	public boolean isBbq() {
+		return bbq;
+	}
+	
+	public boolean isWifiGratis() {
+		return wifiGratis;
+	}
+	
+	public boolean isRecepcion24h() {
+		return recepcion24h;
+	}
+	
+	public boolean isAdmiteMascotas() {
+		return admiteMascotas;
+	}
+
 
 
 
