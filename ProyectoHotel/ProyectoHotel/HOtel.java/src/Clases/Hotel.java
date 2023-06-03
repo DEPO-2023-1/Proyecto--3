@@ -186,8 +186,10 @@ public class Hotel implements Serializable{
 		}
 
 		else if (opcion == 2){
+
 			for (Habitacion h:habitaciones) {
 				String nombre = h.getIdHabitacion();
+				
 				if (nombre.equals(IDHabitacion)) {
 					resultado = "Esta es la informacion de la habitacion: ";
 					resultado += "\nUbicacion-----------------------------" + h.getUbicacion();
@@ -431,19 +433,19 @@ public class Hotel implements Serializable{
 			//Boolean vista = Boolean.parseBoolean(input("Ingrese true si la habitacion tiene Vista, si no ingrese false"));
 			//float PrecioI = Float.parseFloat(input("Ingrese el precio base de la habitacion"));
 
-			if (tipo.equals("Standar")) {
+			if (tipo.equals("standar")) {
 				Standard habitacion = new Standard(idHabitacion, tipo, ubicacion, capacidadNino,
 						capaciodadAdulto, balcon, cocina, vista, PrecioI);
 				habitaciones.add(habitacion);
 
 			}
-			else if (tipo.equals("Suite")) {
+			else if (tipo.equals("suite")) {
 				Suite habitacion = new Suite(idHabitacion, tipo, ubicacion, capacidadNino,
 						capaciodadAdulto, balcon, cocina, vista, PrecioI);
 				habitaciones.add(habitacion);
 
 			}
-			else if (tipo.equals("SuitDoble")) {				
+			else if (tipo.equals("suite doble")) {				
 				SuitDoble habitacion = new SuitDoble(idHabitacion, tipo, ubicacion, capacidadNino,
 						capaciodadAdulto, balcon, cocina, vista, PrecioI);
 				habitaciones.add(habitacion);
