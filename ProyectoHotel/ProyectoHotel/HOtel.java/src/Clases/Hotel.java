@@ -745,9 +745,9 @@ public class Hotel implements Serializable{
 			
 			String nombre = datos[0];
 			String tipo = datos[1];
-			int cantidad = Integer.parseInt(datos[2]);
+			float precio = Float.parseFloat(datos[2]);
 			
-			Servicio inventario1 = new Servicio(nombre, tipo, cantidad);
+			Servicio inventario1 = new Servicio(nombre, tipo, precio);
 			servicios.add(inventario1);
 			
 			linea = lector.readLine();
