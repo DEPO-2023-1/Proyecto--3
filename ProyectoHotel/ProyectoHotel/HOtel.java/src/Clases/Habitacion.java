@@ -322,4 +322,10 @@ public abstract class Habitacion implements Serializable{
 	public String getTipo() {
 		return tipo;
 	}
+
+	public ArrayList<Temporada> getTemporadas() {
+		return temporadas;
+	}
+	
+	
 }

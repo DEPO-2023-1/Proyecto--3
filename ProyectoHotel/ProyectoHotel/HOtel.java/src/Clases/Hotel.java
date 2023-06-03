@@ -739,7 +739,7 @@ public class Hotel implements Serializable{
     	File archivo = new File(Servicio);
 		BufferedReader lector = new BufferedReader(new FileReader(archivo));
 		String linea = lector.readLine();
-		while(linea!=null) {
+		while(linea!=null) {|
 
 			String [] datos = linea.split(";");
 			
@@ -869,6 +869,30 @@ public String input(String mensaje)
 	
 	public boolean isAdmiteMascotas() {
 		return admiteMascotas;
+	}
+
+	public ArrayList<Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public ArrayList<Servicio> getServicios() {
+		return servicios;
+	}
+
+	public ArrayList<ConsumoHot> getConsumosHotel() {
+		return consumosHotel;
+	}
+
+	public ArrayList<Habitacion> getHabitaciones() {
+		return habitaciones;
+	}
+
+	public ArrayList<Inventario> getInventarios() {
+		return inventarios;
+	}
+
+	public ArrayList<MenuRestaurante> getProductos() {
+		return productos;
 	}
 
 
