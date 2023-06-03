@@ -6,10 +6,12 @@ import javax.swing.JOptionPane;
 import Clases.App;
 import Clases.Grupo;
 import Clases.Hotel;
+import Clases.PersistenciaException;
 
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,9 +30,8 @@ public class InterfazLogin extends JFrame{
     private ArrayList<Integer> matriz;
     public static Hotel hotel;
 
-    public InterfazLogin(){
-    	
-        app = new App();
+    public InterfazLogin(App app){
+    	this.app = app;
         matriz = app.listaFechas();
         PanelCalendario = new PanelCalendario(matriz);
         PanelNorte = new PanelNorteLogin();
@@ -46,8 +47,9 @@ public class InterfazLogin extends JFrame{
 			
         setSize(new Dimension(1000, 850));
 		setResizable(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
+
+        setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+        pack( );
 
         JOptionPane.showMessageDialog(null, "Usuario: admin, Contrasenia: admin \n Usuario: empleado, Contrasenia: empleado \n Usuario: recepcionista, Contrasenia: recepcionista", "importante", 1, null);
 
@@ -137,45 +139,40 @@ public class InterfazLogin extends JFrame{
 		}
 		return null;
 	}
-    
 
-	public static void serializarObjeto(Hotel hotel) {
-        try (FileOutputStream fos = new FileOutputStream("hotel.bin");
-                ObjectOutputStream salida = new ObjectOutputStream(fos);) {
-            salida.writeObject(hotel);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+    public void dispose( )
+    {
+       
+        try
+        {
+            app.salvarApp( );
+            super.dispose( );
+        }
+        catch( Exception e )
+        {
+            setVisible( true );
+            int respuesta = JOptionPane.showConfirmDialog( this, "Problemas salvando la información de la app:\n" + e.getMessage( ) + "\n¿Quiere cerrar el programa sin salvar?", "Error", JOptionPane.YES_NO_OPTION );
+            if( respuesta == JOptionPane.YES_OPTION )
+            {
+                super.dispose( );
+            }
         }
     }
+    
+    public static void main(String [] args)  {
 
-	public static Hotel deserializarObjeto(Class<Hotel> claseObjetivo) {
-        Hotel objeto = null;
-        try (FileInputStream fis = new FileInputStream("hotel.bin");
-                ObjectInputStream entrada = new ObjectInputStream(fis);) {
-            objeto = (Hotel) entrada.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
+        App app = null;
+
+        try{
+            app = new App("ProyectoHotel/ProyectoHotel/HOtel.java/data/app.txt");
         }
-        return objeto;
-    }
-    
-    
-    
-    public static void main(String [] args) {
-        InterfazLogin ip = new InterfazLogin();
-
-        Hotel h1 = deserializarObjeto(Hotel.class);
-
-        if (h1 != null){
-		hotel = h1;
-		}
-		else {
-
-		Hotel hotel1 = new Hotel();
-		hotel = hotel1;
-		}
-		
-    	
-		serializarObjeto(hotel);
+        catch( Exception e )
+        {
+            e.printStackTrace( );
+            System.exit( 1 );
+        }
+        InterfazLogin interfazLogin = new InterfazLogin(app);
+        interfazLogin.setVisible(true);
     }
 }
