@@ -2,25 +2,46 @@ package Clases;
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
 
 
 public class App {
-    
+
+    private static final String LOG_FILE = "./data/error.log";
 	public static Hotel hotel;
 	
 	//public static Frame frame;
+	private String archivoApp;
 	
-	public App() {
-		hotel = new Hotel();
+	public App(String nombreArchivoApp) throws FileNotFoundException, IOException, ClassNotFoundException {
+
+		this.archivoApp = nombreArchivoApp;
+		File archivo = new File( nombreArchivoApp );
+        if( archivo.exists( ) ){
+			ObjectInputStream ois = new ObjectInputStream( new FileInputStream( archivoApp ) );
+            hotel = ( Hotel )ois.readObject( );
+            ois.close( );
+			System.out.println("suuuuuuuuuuuuuuuuuu");
+		}
+		else{
+			hotel = new Hotel();
+			System.out.println("saaaaaaaaaaaaaaaaa");
+		}
+
+
+		
 	}
 
     public static boolean seleccionarUsuario(String login, String contraseña, int usuario){
@@ -128,6 +149,40 @@ public class App {
         return objeto;
     }
 
+	public void salvarApp( ) throws PersistenciaException 
+    {
+        try
+        {
+            ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream( archivoApp ) );
+            oos.writeObject( hotel );
+            oos.close( );
+        }
+        catch( IOException e )
+        {
+            registrarError( e );
+            throw new PersistenciaException( "Error al salvar: " + e.getMessage( ) );
+        }
+    }
+
+	public void registrarError( Exception excepcion )
+    {
+        try
+        {
+            FileWriter out = new FileWriter( LOG_FILE, true );
+            PrintWriter log = new PrintWriter( out );
+            log.println( "---------------------------------------" );
+            log.println( "App.java :" );
+            log.println( "---------------------------------------" );
+            excepcion.printStackTrace( log );
+            log.close( );
+            out.close( );
+        }
+        catch( IOException e )
+        {
+            excepcion.printStackTrace( );
+            e.printStackTrace( );
+        }
+    }
 
 
 /* 
