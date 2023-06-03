@@ -739,7 +739,7 @@ public class Hotel implements Serializable{
     	File archivo = new File(Servicio);
 		BufferedReader lector = new BufferedReader(new FileReader(archivo));
 		String linea = lector.readLine();
-		while(linea!=null) {|
+		while(linea!=null) {
 
 			String [] datos = linea.split(";");
 			
